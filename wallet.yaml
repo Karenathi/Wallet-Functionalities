@@ -293,6 +293,16 @@ components:
         transactionHistory:
           type: string
           #liste des transactions
+        creationDate:
+          type: string
+          format: date
+        sortBy:
+          type: string
+          enum: [balance, type, status, creationDate]
+        sortOrder:
+          type: string
+          enum: [asc, desc]
+            
 
 
     
