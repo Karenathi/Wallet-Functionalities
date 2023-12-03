@@ -5,6 +5,9 @@ info:
 paths:
   /user:
     get:
+      security:
+        - apiKey: []
+      
       tags:
         - "Users"
       summary: Show all users
@@ -18,6 +21,8 @@ paths:
     put:
       tags:
         - "Users"
+      security:
+        - apiKey: []
       summary: Add one or more user
       parameters:
         - name: "userID"
@@ -34,6 +39,8 @@ paths:
          '500':
           $ref: '#/components/responses/ServerError'
     delete:
+      security:
+        - apiKey: []
       tags:
         - "Users"
       summary: Delete all users
@@ -45,6 +52,8 @@ paths:
          '500':
           $ref: '#/components/responses/ServerError'
     post:
+      security:
+        - apiKey: []
       tags:
         - "Users"
       summary: Create a new user
@@ -63,6 +72,8 @@ paths:
     get:
       tags:
         - "Users"
+      security:
+        - apiKey: []
       summary: Show user(s) by ID
       parameters:
         - name: userID
@@ -79,6 +90,8 @@ paths:
          '500':
           $ref: '#/components/responses/ServerError'
     delete:
+      security:
+        - apiKey: []
       tags:
         - "Users"
       summary: Delete user by ID
@@ -135,6 +148,11 @@ components:
                 type: string
               password: 
                 type: string
+  securitySchemes:
+    apiKey: 
+      type: apiKey
+      in: header
+      name: Authorization
 
 
 
