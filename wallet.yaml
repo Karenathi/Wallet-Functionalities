@@ -59,6 +59,7 @@ paths:
       summary: Create a new user
       requestBody:
         $ref: "#/components/requestBodies/UserRequestBody"
+        
       responses:
          '200':
            $ref: '#/components/responses/Success'
@@ -148,11 +149,27 @@ components:
                 type: string
               password: 
                 type: string
+            $ref: "#/components/schemas/User"
   securitySchemes:
     apiKey: 
       type: apiKey
       in: header
       name: Authorization
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifier for the user
+        username:
+          type: string
+          minLength: 2
+        password:
+          type: string
+      required:
+        - "username"
+        - "password"
 
 
 
