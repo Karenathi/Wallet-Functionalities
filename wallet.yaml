@@ -561,12 +561,38 @@ components:
           $ref: "#/components/schemas/Currencies"
         transactionAmount:
           type: string
-        transactionTime:
+        transactionDate:
           type: string
           format: timestamp
         transactionStatus:
           type: string
         transactionType:
           type: string
+        category:
+          type: string
+        notifications:
+          type: array
+          items:
+            type: object
+            properties:
+              method:
+                type: string
+                enum:
+                  - email
+                    sms
+                    pushNotification
+              recipient:
+                type: string
+                description: "Email address, phone number, or user ID for the recipient"
+        template: 
+          type: string
+          description: "ID or name of the template associated with the transaction"
+        sortBy:
+          type: string
+          description: "Property by which to sort the transactions"
+        sortOrder:
+          type: string
+          description: "Sort order (asc or desc)"
+
 
 
