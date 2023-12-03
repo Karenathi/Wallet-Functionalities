@@ -210,11 +210,105 @@ paths:
               application/json:
                 schema:
                           $ref: "#/components/schemas/Account"
-               
          '404':
            $ref: '#/components/responses/BadRequest'
          '500':
           $ref: '#/components/responses/ServerError'
+  /currencies:
+    get:
+      tags:
+        - "Currencies"
+      summary: Get currency details
+      parameters:
+        - name: sortBy
+          in: query
+          description: Sort by a specific property
+          schema:
+            type: string
+          example: "currencyCode"
+        - name: sortOrder
+          in: query
+          description: "Sort order (asc or dsc)"
+          schema:
+            type: array
+            enum:
+              - asc
+              - dsc
+            example: dsc
+      responses:
+        '200':
+            description: Successful response
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Currencies"
+        '404':
+           $ref: '#/components/responses/BadRequest'
+        '500':
+           $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+        - "Currencies"
+      summary: Create a new currency
+      requestBody:
+        $ref: "#/components/requestBodies/CurrenciesRequestBody"
+
+      responses:
+         '200':
+            description: Currencies created successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Currencies"
+         '404':
+           $ref: '#/components/responses/BadRequest'
+         '500':
+          $ref: '#/components/responses/ServerError'
+  /currencies/{currencyCode}:
+    put:
+      tags:
+        - "Currencies"
+      summary: Update currency details by code
+      parameters:
+        - name: currencyCode
+          in: path
+          required: true
+          description: "Code of the currency to update"
+          schema:
+            type: integer
+      requestBody:
+        $ref: "#/components/requestBodies/CurrenciesRequestBody"
+      responses:
+        '200':
+            description: Currencies updated successfully
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Currencies"
+        '404':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+        - "Currencies"
+      summary: Delete currency by code
+      parameters:
+        - name: currencyCode
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+            description: Currency deleted successfully
+        '404':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
 
 
 components:
@@ -256,6 +350,11 @@ components:
               password: 
                 type: string
             $ref: "#/components/schemas/User"
+    CurrenciesRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Currencies"
   securitySchemes:
     apiKey: 
       type: apiKey
@@ -318,12 +417,9 @@ components:
           type: string
         currencyUnit:
           type: string
-        lastUpdated: 
+        lastUpdated:
           type: string
           format: date
         exchangeRate:
           type: string
-          #taux de change par rapport à une devise
 
-
-    
