@@ -309,6 +309,126 @@ paths:
         '500':
           $ref: '#/components/responses/ServerError'
 
+  /transactions/{transactionID}:
+    get:
+      tags:
+        - "Transactions"
+      summary: Get transaction by ID
+      parameters:
+        - name: transactionID
+          in: path
+          required: true
+          description: "ID of the transaction to retrieve"
+          schema:
+            type: string
+      responses:
+        '200':
+           description: Successful response
+           content:
+             application/json:
+               schema:
+                 $ref: '#/components/schemas/Transactions'
+        '404':
+           $ref: '#/components/responses/BadRequest'
+        '500':
+           $ref: '#/components/responses/ServerError'
+    put:
+      tags:
+        - "Transactions"
+      summary: Update transactions details by ID
+      parameters:
+        - name: transactionID
+          in: path
+          required: true
+          description: "ID of the transaction to update"
+          schema:
+            type: string
+      requestBody:
+        $ref: "#/components/requestBodies/TransactionsRequestBody"
+      responses:
+        '200':
+           description: Transaction updated successfully
+           content:
+             application/json:
+               schema:
+                 $ref: '#/components/schemas/Transactions'
+        '404':
+           $ref: '#/components/responses/BadRequest'
+        '500':
+           $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+        - "Transactions"
+      summary: Delete transaction by ID
+      parameters:
+        - name: transactionID
+          in: path
+          description: "ID of the transaction to be deleted"
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+           description: Transaction deleted successfully
+        '404':
+           $ref: '#/components/responses/BadRequest'
+        '500':
+           $ref: '#/components/responses/ServerError'
+  /transactions:
+    get:
+      tags:
+        - "Transactions"
+      security:
+        - apiKey: []
+      summary: Get transaction details
+      parameters:
+        - name: sortBy
+          in: query
+          description: "Sort by a specific property (e.g., transactionTime, transactionAmount)"
+          schema:
+            type: string
+          example: "transactionTime"
+        - name: sortOrder
+          in: query
+          description: "Sort order (asc or desc)"
+          schema:
+            type: string
+            enum: ["asc", "desc"]
+          example: "asc"
+      responses:
+         '200':
+           description: Successful response
+           content:
+             application/json:
+               schema:
+                 type: array
+                 items:
+                   $ref: '#/components/schemas/Transactions'
+         '404':
+           $ref: '#/components/responses/BadRequest'
+         '500':
+           $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+        - "Transactions"
+      summary: Create a new transaction
+      requestBody:
+        $ref: "#/components/requestBodies/TransactionsRequestBody"
+      responses:
+         '200':
+           description: Account created successfully
+           content:
+             application/json:
+               schema:
+                 type: array
+                 items:
+                   $ref: '#/components/schemas/Transactions'
+         '404':
+           $ref: '#/components/responses/BadRequest'
+         '500':
+           $ref: '#/components/responses/ServerError'
+      
+
 
 
 components:
@@ -355,6 +475,11 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/Currencies"
+    TransactionsRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Transactions"
   securitySchemes:
     apiKey: 
       type: apiKey
