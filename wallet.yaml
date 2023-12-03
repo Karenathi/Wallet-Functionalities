@@ -195,6 +195,27 @@ paths:
            $ref: '#/components/responses/BadRequest'
          '500':
           $ref: '#/components/responses/ServerError'
+  /account:
+    post:
+      tags:
+        - "Accounts"
+      summary: Create a new account
+      requestBody:
+         $ref: "#/components/requestBodies/AccountRequestBody"
+        
+      responses:
+         '200':
+            description: Account created successfully
+            content:
+              application/json:
+                schema:
+                          $ref: "#/components/schemas/Account"
+               
+         '404':
+           $ref: '#/components/responses/BadRequest'
+         '500':
+          $ref: '#/components/responses/ServerError'
+
 
 components:
   responses:
@@ -217,11 +238,11 @@ components:
           example:
             error: "Internal Server Error"
   requestBodies:
-    RequestBody:
-      content:
+    AccountRequestBody:
+       content:
         application/json:
           schema:
-            type: object
+            $ref: "#/components/schemas/Account"
     UserRequestBody:
       content:
         application/json:
