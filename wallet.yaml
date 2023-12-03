@@ -112,6 +112,26 @@ paths:
          '500':
           $ref: '#/components/responses/ServerError'
 
+  /account/{accountID}:
+    get:
+      tags:
+        - "Accounts"
+      summary: Get account details by ID
+      parameters:
+        - name: accountID
+          required: true
+          in: path
+          description: ID of the account to retrieve
+          schema:
+            type: string
+      responses:
+         '200':
+           $ref: '#/components/responses/Success'
+         '404':
+           $ref: '#/components/responses/BadRequest'
+         '500':
+          $ref: '#/components/responses/ServerError'
+          
 components:
   responses:
     Success:
@@ -171,6 +191,23 @@ components:
       required:
         - "username"
         - "password"
+    Account:
+      type: object
+      properties:
+        accountID:
+          type: string
+        accountBalance:
+          type: integer
+        accountCurrency:
+          type: string
+          #devise du compte
+        accountType: 
+          type: string
+        accountStatus:
+          type: string
+        transactionHistory:
+          type: string
+          #liste des transactions
 
 
-
+    
