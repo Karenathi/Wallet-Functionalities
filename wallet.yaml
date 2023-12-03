@@ -273,19 +273,24 @@ components:
           minLength: 2
         password:
           type: string
+        account:
+          $ref: "#/components/schemas/Account"
+        currencies:
+         $ref: "#/components/schemas/Currencies"
       required:
         - "username"
         - "password"
     Account:
       type: object
       properties:
+        user:
+          $ref: "#/components/schemas/User"
         accountID:
           type: string
         accountBalance:
           type: integer
         accountCurrency:
-          type: string
-          #devise du compte
+           $ref: "#/components/schemas/Currencies"
         accountType: 
           type: string
         accountStatus:
@@ -302,7 +307,23 @@ components:
         sortOrder:
           type: string
           enum: [asc, desc]
-            
+    Currencies:
+      type: object
+      properties:
+        currencyCode:
+          type: integer
+        currencyName:
+          type: string
+        currencySymbol:
+          type: string
+        currencyUnit:
+          type: string
+        lastUpdated: 
+          type: string
+          format: date
+        exchangeRate:
+          type: string
+          #taux de change par rapport à une devise
 
 
     
