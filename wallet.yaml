@@ -11,6 +11,7 @@ paths:
       tags:
         - "Users"
       summary: Show all users
+      
       responses:
          '200':
            $ref: '#/components/responses/Success'
@@ -23,7 +24,7 @@ paths:
         - "Users"
       security:
         - apiKey: []
-      summary: Add one or more user
+      summary: Update user
       parameters:
         - name: "userID"
           in: path
@@ -119,10 +120,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/User'
-          example: 
-            success: true
-        
-              
     BadRequest:
       description: Bad Request
       content:
