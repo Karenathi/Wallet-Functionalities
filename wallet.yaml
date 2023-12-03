@@ -1,0 +1,61 @@
+openapi: 3.0.1
+info:
+  title: Wallet API
+  version: 1.0.0
+paths:
+  /user:
+    get:
+      tags:
+        - "user"
+      summary: Show all users
+      responses:
+         '200':
+           $ref: '#/components/responses/Success'
+         '404':
+           $ref: '#/components/responses/NotFound'
+         '500':
+          $ref: '#/components/responses/ServerError'
+
+
+  /user/{userID}:
+    get:
+      tags:
+        - "user"
+      summary: Show user(s) by ID
+      parameters:
+        - name: userID
+          in: path
+          required: true
+          description : User's ID
+          schema:
+            type: string
+      responses:
+         '200':
+           $ref: '#/components/responses/Success'
+         '404':
+           $ref: '#/components/responses/NotFound'
+         '500':
+          $ref: '#/components/responses/ServerError'
+
+
+components:
+  responses:
+    Success:
+      description: Successful request
+      content:
+        application/json:
+          example: 
+            success: true
+    NotFound:
+      description:  Page not found
+      content:
+        application/json:
+          example:
+            error: "Page not found"
+    ServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          example:
+            error: "Internal Server Error"
+
