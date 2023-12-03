@@ -395,8 +395,7 @@ components:
         accountStatus:
           type: string
         transactionHistory:
-          type: string
-          #liste des transactions
+          $ref: "#/components/schemas/Transactions"
         creationDate:
           type: string
           format: date
@@ -422,4 +421,27 @@ components:
           format: date
         exchangeRate:
           type: string
+        account:
+          $ref: "#/components/schemas/Account"
+    Transactions:
+      type: object
+      properties:
+        transactionID:
+          type: string
+        sourceAccount:
+          $ref: "#/components/schemas/User"
+        destinationAccount:
+          $ref: "#/components/schemas/User"
+        transactionCurrency:
+          $ref: "#/components/schemas/Currencies"
+        transactionAmount:
+          type: string
+        transactionTime:
+          type: string
+          format: timestamp
+        transactionStatus:
+          type: string
+        transactionType:
+          type: string
+
 
