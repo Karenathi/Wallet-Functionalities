@@ -117,8 +117,12 @@ components:
       description: Successful request
       content:
         application/json:
+          schema:
+            $ref: '#/components/schemas/User'
           example: 
             success: true
+        
+              
     BadRequest:
       description: Bad Request
       content:
