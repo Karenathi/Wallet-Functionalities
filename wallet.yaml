@@ -1,6 +1,7 @@
 openapi: 3.0.1
 info:
   title: Wallet API
+  description: This is an api about the functionnalities of the wallet budgetbuckers application 
   version: 1.0.0
 paths:
   /user:
